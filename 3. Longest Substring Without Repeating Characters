@@ -1,0 +1,40 @@
+class Solution:
+    def lengthOfLongestSubstring(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        dict={}
+        rs=0
+        repeat_i=0
+        for i in range(len(s)):
+            if s[i] in dict:
+                repeat_i=max(repeat_i,dict[s[i]]+1)
+            dict[s[i]]=i
+            rs=max(rs,i-repeat_i+1)
+        return rs
+        
+        
+ class Solution:
+    def lengthOfLongestSubstring(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        dict={}
+        rs=0
+        temp=0
+        index=0
+        for i in range(len(s)):
+            if s[i] not in dict:
+                temp+=1
+            else:
+                repeat_i=dict[s[i]]
+                for key in s[index:repeat_i+1]:
+                    dict.pop(key)
+                index = repeat_i+1
+                temp = i-repeat_i
+            dict[s[i]] = i
+            if rs<temp:
+                rs=temp
+        return rs
